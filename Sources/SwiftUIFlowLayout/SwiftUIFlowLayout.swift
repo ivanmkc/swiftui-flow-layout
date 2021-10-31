@@ -1,3 +1,10 @@
+//
+//  FlowLayout2.swift
+//  Chatbot
+//
+//  Created by Ivan Cheung on 2021-10-31.
+//
+
 import SwiftUI
 
 public let flowLayoutDefaultItemSpacing: CGFloat = 4
@@ -45,8 +52,7 @@ public struct FlowLayout<RefreshBinding, Data, ItemView: View>: View {
     var lastHeight = CGFloat.zero
     let itemCount = items.count
     return ZStack(alignment: .topLeading) {
-        ForEach(0..<itemCount) { index in
-            let item = items[index]
+        ForEach(Array(items.enumerated()), id: \.offset) { index, item in
             viewMapping(item)
               .padding([.horizontal, .vertical], itemSpacing)
               .alignmentGuide(.leading, computeValue: { d in
